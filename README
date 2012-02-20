@@ -1,0 +1,104 @@
+Usage example ,  in your view file  use it like some other widgets!:
+
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: yiqing
+ * Date: 12-2-18
+ * Time: 下午11:17
+ * To change this template use File | Settings | File Templates.
+ */
+$this->widget('common.widgets.tag.tagit.JTagIt', array(
+    'selector' => '#mytags',
+));
+?>
+
+<ul id="mytags">
+    <!-- Existing list items will be pre-added to the tags -->
+    <li>Tag1</li>
+    <li>Tag2</li>
+</ul>
+<div>
+    <h5>example 2</h5>
+    <?php $this->widget('common.widgets.tag.tagit.JTagIt', array(
+    'selector' => '#mytags2',
+    'options' => 'js:{ itemName: "user"}'
+));
+    ?>
+
+    <ul id="mytags2">
+        <!-- Existing list items will be pre-added to the tags -->
+        <li>Tag1</li>
+        <li>Tag2</li>
+    </ul>
+</div>
+<div>
+    <h5>example 3</h5>
+    <?php $this->widget('common.widgets.tag.tagit.JTagIt', array(
+    'selector' => '#mytags3',
+    'options' => array(
+        'fieldName'=> 'skills',
+    ),
+));
+    ?>
+
+    <ul id="mytags3">
+        <!-- Existing list items will be pre-added to the tags -->
+        <li>Tag1</li>
+        <li>Tag2</li>
+    </ul>
+</div>
+
+
+<div>
+    <h5>example availableTags (Array) </h5>
+    <h6>Used as source for the autocompletion.("c++", "java", "php", "javascript", "ruby", "python", "c")
+     <br> you can type c/j/p/r..  to see the effect!
+    </h6>
+    <?php $this->widget('common.widgets.tag.tagit.JTagIt', array(
+    'selector' => '#mytags4',
+    // 'theme'=>'eggplant',    //remove the comment to see the another ui effect!
+    'options' => array(
+        'fieldName'=> 'skills',
+        'availableTags'=>array("c++", "java", "php", "javascript", "ruby", "python", "c"),
+        // event handler
+        'onTagAdded'=>'js:function(event, tag){ alert("tag"+tag.html()+"  added!") ;}',
+        'onTagRemoved'=>'js:function(event, tag) {
+         alert("you want remove the tag!");
+    }'
+    ),
+));
+    ?>
+
+    <ul id="mytags4">
+        <!-- Existing list items will be pre-added to the tags -->
+        <li>Tag1</li>
+        <li>Tag2</li>
+    </ul>
+</div>
+
+    <div id='msg' style="background: #c2973f"></div>
+    <div>
+        <script type="text/javascript">
+            function addTag(){
+                $("#mytags4").tagit("createTag", "brand-new-tag");
+            }
+
+            function removeAllTags(){
+                $("#mytags4").tagit("removeAll");
+            }
+
+            function getAllTags(){
+               var tags = $("#mytags4").tagit("assignedTags");
+                //alert(typeof tags);
+                alert(tags.toString());
+            }
+
+        </script>
+        <h3>methods test!</h3>
+        <div>
+            <a href="javascript:;" onclick="getAllTags()">get all tags</a>
+            <a href="javascript:;" onclick="addTag()">add tag</a>
+            <a href="javascript:;" onclick="removeAllTags()">remove all</a>
+        </div>
+    </div>
